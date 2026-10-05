@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-deployment
+  namespace: lab2-app
+  labels:
+    app: web-app
+
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: web-app
+
+  template:
+    metadata:
+      labels:
+        app: web-app
+
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:latest
+
+          ports:
+            - containerPort: 80
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "300m"
+              memory: "256Mi"
